@@ -1,3 +1,4 @@
+import { useNavigate } from "@solidjs/router";
 import { createSignal, For, createEffect } from "solid-js";
 
 export default function MiniCaptcha() {
@@ -6,6 +7,7 @@ export default function MiniCaptcha() {
    >([]);
    const [error, setError] = createSignal("");
    const [verified, setVerified] = createSignal(false);
+   const navigate = useNavigate()
 
    createEffect(() => {
       // Generate 9 squares randomly, some with trees
@@ -50,7 +52,7 @@ export default function MiniCaptcha() {
       if (!verified()) {
          setError("Please verify you are human!");
       } else {
-         alert("✅ Captcha passed. Form submitted!");
+         navigate("/game")
       }
    }
 
