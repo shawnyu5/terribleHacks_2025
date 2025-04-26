@@ -24,6 +24,7 @@ export default function Login() {
 
   return (
     <div id="login-form">
+      <h1>Very Secure Banking Website :)</h1>
       {
         <ErrorMessage message={errorMessage()} />
       }
