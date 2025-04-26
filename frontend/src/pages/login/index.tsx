@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import ErrorMessage from "@/components/ErrorMessage";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,8 +16,9 @@ export default function Login() {
     console.log("Password:", password);
 
     if (email == "terrible@hacks.com" && password == "password") {
-       setErrorMessage("")
+      setErrorMessage("");
       console.log("Success!");
+      router.push("/oauth");
     } else {
       setErrorMessage("Invalid user login");
     }
