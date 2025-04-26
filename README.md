@@ -4,12 +4,13 @@
 
 1. [x] Email / Password auth
 2. [ ] Oauth - WIP
-3. [ ] Captcha
-4. [ ] RFID
-5. [ ] Skill testing (puzzle, trivia)
-6. [ ] Game
-7. [ ] Dab up
-8. [ ] Sudoku
-9. [ ] Cursed audio
-10. [ ] Pokemon country
-11. [ ] Geo guesser
+3. [x] Skill test - math problem
+4. [ ] Skill testing (puzzle, trivia)
+5. [ ] Captcha
+6. [ ] RFID
+7. [ ] Game
+8. [ ] Dab up
+9. [ ] Sudoku
+10. [ ] Cursed audio
+11. [ ] Pokemon country
+12. [ ] Geo guesser
