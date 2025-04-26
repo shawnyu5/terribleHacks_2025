@@ -41,7 +41,7 @@ export default function MiniCaptcha() {
          setVerified(true);
          setError("");
       } else {
-         setError("❌ Incorrect selection. Try again!");
+         setError("Ah oh, are u are robot 🤨");
          setVerified(false);
       }
    }
