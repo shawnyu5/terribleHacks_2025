@@ -1,168 +1,126 @@
-import { createSignal, For, Show } from "solid-js";
+import { createSignal } from 'solid-js';
 
-function Square(props: { value: string | null; onSquareClick: () => void }) {
+function Square(props: { value: string | null; onClick: () => void }) {
   return (
-    <button class="square" onClick={props.onSquareClick}>
+    <button
+      class="square"
+      onClick={props.onClick}
+      style="width: 60px; height: 60px; font-size: 24px; font-weight: bold; margin: 5px;"
+    >
       {props.value}
     </button>
   );
 }
 
-function Board(props: {
-  xIsNext: boolean;
-  squares: (string | null)[];
-  onPlay: (squares: (string | null)[]) => void;
-  gameOver: boolean;
-}) {
-  function handleClick(i: number) {
-    if (
-      calculateWinner(props.squares) ||
-      props.squares[i] ||
-      !props.xIsNext ||
-      props.gameOver
-    ) {
-      return;
-    }
-    const nextSquares = props.squares.slice();
-    nextSquares[i] = "X";
-    props.onPlay(nextSquares);
-  }
-
-  const winner = calculateWinner(props.squares);
-  const status = winner
-    ? `Winner: ${winner}`
-    : `Next player: ${props.xIsNext ? "X" : "O"}`;
-
+function Board(props: { squares: (string | null)[]; onClick: (i: number) => void }) {
   return (
-    <>
-      <div class="status">{status}</div>
-      <div class="board-row">
-        <Square value={props.squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={props.squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={props.squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div class="board-row">
-        <Square value={props.squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={props.squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={props.squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div class="board-row">
-        <Square value={props.squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={props.squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={props.squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
-    </>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+      {props.squares.map((square, idx) => (
+        <Square value={square} onClick={() => props.onClick(idx)} />
+      ))}
+    </div>
   );
 }
 
 export default function Game() {
-  const [history, setHistory] = createSignal<(string | null)[][]>([
-    Array(9).fill(null),
-  ]);
-  const [currentMove, setCurrentMove] = createSignal(0);
+  const [squares, setSquares] = createSignal<(string | null)[]>(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = createSignal(true);
+  const [status, setStatus] = createSignal('Next player: X');
   const [gameOver, setGameOver] = createSignal(false);
-  const [endMessage, setEndMessage] = createSignal("");
 
-  const xIsNext = () => currentMove() % 2 === 0;
-  const currentSquares = () => history()[currentMove()];
-
-  function handlePlay(nextSquares: (string | null)[]) {
-    const nextHistory = [...history().slice(0, currentMove() + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-
+  function handleClick(i: number) {
+    if (gameOver() || squares()[i] || !xIsNext()) {
+      return;
+    }
+    const nextSquares = [...squares()];
+    nextSquares[i] = 'X';
+    setSquares(nextSquares);
     const winner = calculateWinner(nextSquares);
 
-    if (winner === "O") {
-      setEndMessage("😢 You lost! Play again?");
+    if (winner) {
+      setStatus('🎉 You win!');
       setGameOver(true);
       return;
     }
 
-    if (!winner && !nextSquares.includes(null)) {
-      setEndMessage("😐 It's a draw! Play again?");
+    if (!nextSquares.includes(null)) {
+      setStatus('😐 Draw!');
       setGameOver(true);
       return;
     }
 
-    if (!winner && nextSquares.includes(null)) {
-      setTimeout(() => {
-        makeAIMove(nextSquares);
-      }, 500);
-    }
+    setXIsNext(false);
+    setStatus('Next player: O');
+
+    setTimeout(() => {
+      if (!gameOver()) {
+        makeAIMove();
+      }
+    }, 500);
   }
 
-  function makeAIMove(squares: (string | null)[]) {
-    const emptyIndices = squares
+  function makeAIMove() {
+    if (gameOver()) return;
+
+    const currentSquares = squares();
+    const emptyIndices = currentSquares
       .map((val, idx) => (val === null ? idx : null))
       .filter((val) => val !== null) as number[];
 
     if (emptyIndices.length === 0) return;
 
-    const randomIndex =
-      emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
-    const nextSquares = squares.slice();
-    nextSquares[randomIndex] = "O";
-
-    const nextHistory = [...history().slice(0, currentMove() + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
+    const randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+    const nextSquares = [...currentSquares];
+    nextSquares[randomIndex] = 'O';
+    setSquares(nextSquares);
 
     const winner = calculateWinner(nextSquares);
-    if (winner === "O") {
-      setEndMessage("😢 You lost! Play again?");
-      setGameOver(true);
-    } else if (!winner && !nextSquares.includes(null)) {
-      setEndMessage("😐 It's a draw! Play again?");
-      setGameOver(true);
-    }
-  }
 
-  function jumpTo(nextMove: number) {
-    setCurrentMove(nextMove);
+    if (winner) {
+      setStatus('😢 You lost!');
+      setGameOver(true);
+      return;
+    }
+
+    if (!nextSquares.includes(null)) {
+      setStatus('😐 Draw!');
+      setGameOver(true);
+      return;
+    }
+
+    setXIsNext(true);
+    setStatus('Next player: X');
   }
 
   function restartGame() {
-    setHistory([Array(9).fill(null)]);
-    setCurrentMove(0);
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setStatus('Next player: X');
     setGameOver(false);
-    setEndMessage("");
   }
 
   return (
-    <div class="game">
-      <div class="game-board">
-        <Board
-          xIsNext={xIsNext()}
-          squares={currentSquares()}
-          onPlay={handlePlay}
-          gameOver={gameOver()}
-        />
-        <Show when={gameOver()}>
-          <div class="game-over">
-            <p class="text-xl font-bold mt-4">{endMessage()}</p>
-            <button
-              onClick={restartGame}
-              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2"
-            >
-              Play Again
-            </button>
-          </div>
-        </Show>
+    <div
+      class="game"
+      style="display: flex; flex-direction: column; align-items: center; margin-top: 50px;"
+    >
+      <div
+        class="status"
+        style="margin-bottom: 20px; font-size: 24px; font-weight: bold;"
+      >
+        {status()}
       </div>
-      <div class="game-info">
-        <ol>
-          <For each={history()}>
-            {(squares, move) => (
-              <li>
-                <button onClick={() => jumpTo(move)}>
-                  {move > 0 ? `Go to move #${move}` : "Go to game start"}
-                </button>
-              </li>
-            )}
-          </For>
-        </ol>
-      </div>
+
+      <Board squares={squares()} onClick={handleClick} />
+
+      {gameOver() && (
+        <button
+          onClick={restartGame}
+          style="margin-top: 20px; padding: 10px 20px; font-size: 18px; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;"
+        >
+          Play Again
+        </button>
+      )}
     </div>
   );
 }
@@ -178,7 +136,7 @@ function calculateWinner(squares: (string | null)[]) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for (let [a, b, c] of lines) {
+  for (const [a, b, c] of lines) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
