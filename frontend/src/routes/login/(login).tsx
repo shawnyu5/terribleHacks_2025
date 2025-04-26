@@ -16,8 +16,9 @@ export default function Login() {
     if (email() === "terrible@hacks.com" && password() === "password") {
       setErrorMessage("");
       console.log("Success!");
-      navigate("/oauth");
+      navigate("/math");
     } else {
+      console.log("Invalid user login");
       setErrorMessage("Invalid user login");
     }
   };
@@ -38,7 +39,7 @@ export default function Login() {
           required
         />
         <input
-          type="password"
+          // type="password"
           placeholder="Password"
           value={password()}
           onInput={(e) => setPassword(e.currentTarget.value)}
