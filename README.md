@@ -3,15 +3,10 @@
 ## Ideas
 
 1. [x] Email / Password auth
-2. [ ] Email verification code - WIP
-3. [x] Skill test - math problem
-4. [x] Captcha
+2. [x] Math problem
+3. [x] Captcha
        a. [ ] TODO: add some dumb images
-5. [ ] Geo guesser - WIP
-6. [ ] tic tac toe - WIP
-7. [ ] RFID - WIP
-8. [ ] Dab up - WIP
-9. [ ] Skill testing (puzzle, trivia)
-10. [ ] Sudoku
-11. [ ] Cursed audio
-12. [ ] Pokemon country
+4. [x] tic tac toe
+5. [ ] RFID - WIP
+6. [x] Vote
+7. [ ] Last page

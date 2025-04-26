@@ -10,7 +10,7 @@ export default function Dab() {
 
       <button
         onClick={() => {
-          navigate("/game");
+          navigate("/do-u-want-to-login");
         }}
       >
         Login

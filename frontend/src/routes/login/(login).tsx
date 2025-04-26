@@ -16,8 +16,9 @@ export default function Login() {
     if (email() === "terrible@hacks.com" && password() === "password") {
       setErrorMessage("");
       console.log("Success!");
-      navigate("/oauth");
+      navigate("/math");
     } else {
+      console.log("Invalid user login");
       setErrorMessage("Invalid user login");
     }
   };
@@ -25,9 +26,7 @@ export default function Login() {
   return (
     <div id="login-form">
       <h1>Very Secure Banking Website :)</h1>
-      {
-        <ErrorMessage message={errorMessage()} />
-      }
+      {<ErrorMessage message={errorMessage()} />}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -37,7 +36,7 @@ export default function Login() {
           required
         />
         <input
-          type="password"
+          // type="password"
           placeholder="Password"
           value={password()}
           onInput={(e) => setPassword(e.currentTarget.value)}
