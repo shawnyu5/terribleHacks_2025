@@ -8,7 +8,7 @@
 4. [x] Skill testing (puzzle, trivia)
 5. [ ] Captcha
 6. [ ] RFID
-7. [ ] Game
+7. [ ] Game, tic tac toe - WIP
 8. [ ] Dab up
 9. [ ] Sudoku
 10. [ ] Cursed audio
