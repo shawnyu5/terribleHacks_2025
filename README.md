@@ -5,12 +5,13 @@
 1. [x] Email / Password auth
 2. [ ] Oauth - WIP
 3. [x] Skill test - math problem
-4. [x] Skill testing (puzzle, trivia)
-5. [ ] Captcha
+4. [x] Captcha
+       a. [ ] TODO: add some dumb images
+5. [ ] Skill testing (puzzle, trivia)
 6. [ ] RFID
 7. [ ] Game, tic tac toe - WIP
-8. [ ] Dab up
+8. [ ] Dab up - WIP
 9. [ ] Sudoku
 10. [ ] Cursed audio
 11. [ ] Pokemon country
-12. [ ] Geo guesser
+12. [ ] Geo guesser - WIP
