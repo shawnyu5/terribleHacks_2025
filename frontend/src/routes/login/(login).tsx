@@ -26,7 +26,7 @@ export default function Login() {
   return (
     <div id="login-form">
       <img src="/logo.png" alt="Logo" width="400" height="100" style={{ display: "block", margin: "1.5rem auto 0 auto" }} />
-      <h1>Personal Banking</h1>
+      <h1>Personal Banking </h1>
       {
         <ErrorMessage message={errorMessage()} />
       }
