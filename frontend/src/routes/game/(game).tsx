@@ -1,5 +1,6 @@
-import { createSignal } from 'solid-js';
-import { useNavigate } from 'solid-start';
+import { createSignal } from "solid-js";
+import { useNavigate } from "@solidjs/router";
+import ErrorMessage from "~/components/ErrorMessage";
 
 function Square(props: { value: string | null; onClick: () => void }) {
   return (
@@ -28,9 +29,7 @@ export default function Game() {
   const [xIsNext, setXIsNext] = createSignal(true);
   const [status, setStatus] = createSignal('Next player: X');
   const [gameOver, setGameOver] = createSignal(false);
-
-  const navigate = useNavigate(); // 👈 Add navigate from solid-start
-
+  const navigate = useNavigate()
   function handleClick(i: number) {
     if (gameOver() || squares()[i] || !xIsNext()) {
       return;
@@ -43,10 +42,10 @@ export default function Game() {
     if (winner) {
       setStatus('🎉 You win!');
       setGameOver(true);
-
-      // 👇 Add a short delay, then navigate
+      console.log("Success!");
       setTimeout(() => {
-        navigate('/rfid');
+        // 👇 Browser redirect after 0.5 seconds
+      navigate("/rfid");;
       }, 500);
 
       return;
