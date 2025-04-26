@@ -1,3 +1,4 @@
+import { useNavigate } from "@solidjs/router";
 import { createSignal, Match, Switch } from "solid-js";
 
 function Square(props: { value: string | null; onClick: () => void }) {
@@ -37,6 +38,7 @@ export default function Game() {
    const [status, setStatus] = createSignal("Next player: X");
    const [gameResult, setGameResult] = createSignal<GameResult | null>(null);
    const [gameOver, setGameOver] = createSignal(false);
+   const navigate = useNavigate()
 
    function handleClick(i: number) {
       if (gameOver() || squares()[i] || !xIsNext()) {
@@ -50,6 +52,7 @@ export default function Game() {
       if (winner) {
          setStatus("🎉 You win!");
          setGameOver(true);
+         navigate("/rfid")
          return;
       }
 
