@@ -7,9 +7,9 @@ export default function KeyListener() {
     const handleKeyDown = (event: KeyboardEvent) => {
       console.log("You pressed:", event.key);
 
-      if (event.key === "f20") {
+      if (event.key === "F20") {
         console.log("Enter was pressed!");
-        navigate("/logged-in")
+        navigate("/tips")
       }
     };
 
@@ -22,8 +22,9 @@ export default function KeyListener() {
   });
 
   return (
-    <div>
-      <h1>Press any key!</h1>
-    </div>
+<div>
+      <h1>Please present your Credit Card</h1>
+      <img src="/card.png" alt="Card" width="150" height="100" style={{ display: "block", margin: "1.5rem auto 0 auto" }} />
+      </div>
   );
 }
