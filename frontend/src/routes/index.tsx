@@ -1,19 +1,17 @@
 import { Title } from "@solidjs/meta";
-import Counter from "~/components/Counter";
+import { useNavigate } from "@solidjs/router";
+import { onMount } from "solid-js";
 
 export default function Home() {
-  return (
-    <main>
-      <Title>Hello World</Title>
-      <h1>Hello world!</h1>
-      <Counter />
-      <p>
-        Visit{" "}
-        <a href="https://start.solidjs.com" target="_blank">
-          start.solidjs.com
-        </a>{" "}
-        to learn how to build SolidStart apps.
-      </p>
-    </main>
-  );
+   const navigate = useNavigate();
+
+   onMount(() => {
+      navigate("/login");
+   });
+
+   return (
+      <main>
+         <Title>Hello World</Title>)
+      </main>
+   );
 }

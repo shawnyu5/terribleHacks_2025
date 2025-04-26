@@ -8,10 +8,10 @@
 4. [x] Captcha
        a. [ ] TODO: add some dumb images
 5. [ ] Skill testing (puzzle, trivia)
-6. [ ] RFID
-7. [ ] Game, tic tac toe - WIP
-8. [ ] Dab up - WIP
-9. [ ] Sudoku
-10. [ ] Cursed audio
-11. [ ] Pokemon country
-12. [ ] Geo guesser - WIP
+6. [ ] Geo guesser - WIP
+7. [ ] RFID
+8. [ ] Game, tic tac toe - WIP
+9. [ ] Dab up - WIP
+10. [ ] Sudoku
+11. [ ] Cursed audio
+12. [ ] Pokemon country
