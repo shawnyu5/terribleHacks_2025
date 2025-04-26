@@ -5,7 +5,7 @@
 1. [x] Email / Password auth
 2. [ ] Oauth - WIP
 3. [x] Skill test - math problem
-4. [ ] Skill testing (puzzle, trivia)
+4. [x] Skill testing (puzzle, trivia)
 5. [ ] Captcha
 6. [ ] RFID
 7. [ ] Game
