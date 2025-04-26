@@ -1,17 +1,17 @@
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 
 export default function Tips() {
-  const [selected, setSelected] = createSignal<number | null>(null);
+  const [selectedTip, setSelectedTip] = createSignal<number | null>(null);
   const navigate = useNavigate();
 
   const handleTip = (percent: number) => {
-    setSelected(percent);
-    if (percent === 20) {
-      setTimeout(() => {
-        navigate("/vote");
-      }, 2000);
-    }
+    setSelectedTip(percent);
+    // if (percent === 20) {
+    //   setTimeout(() => {
+    //     navigate("/vote");
+    //   }, 2000);
+    // }
   };
 
   return (
@@ -32,8 +32,8 @@ export default function Tips() {
           <button
             type="button"
             style={{
-              background: selected() === percent ? "#335d92" : "#fff",
-              color: selected() === percent ? "#fff" : "#335d92",
+              background: selectedTip() === percent ? "#335d92" : "#fff",
+              color: selectedTip() === percent ? "#fff" : "#335d92",
               border: "2px solid #335d92",
               borderRadius: "10px",
               fontSize: "1.5rem",
@@ -42,14 +42,14 @@ export default function Tips() {
               cursor: "pointer",
               transition: "background 0.2s, color 0.2s",
             }}
-            onClick={() => handleTip(percent)}
-            disabled={selected() === 20}
+            onClick={() => setSelectedTip(percent)}
+            disabled={selectedTip() === 20}
           >
             {percent}%
           </button>
         ))}
       </div>
-      {(selected() === 10 || selected() === 15) && (
+      {(selectedTip() === 10 || selectedTip() === 15) && (
         <div style={{ marginTop: "1.5rem" }}>
           <input
             type="text"
@@ -65,14 +65,30 @@ export default function Tips() {
           />
         </div>
       )}
-      {selected() === 20 && (
+      {selectedTip() === 20 && (
         <div style={{ marginTop: "2rem" }}>
           <div style={{ fontSize: "3rem" }}>😊</div>
-          <div style={{ fontSize: "1.5rem", marginTop: "0.5rem", color: "#335d92", fontWeight: 600 }}>
+          <div
+            style={{
+              fontSize: "1.5rem",
+              marginTop: "0.5rem",
+              color: "#335d92",
+              fontWeight: 600,
+            }}
+          >
             Thank You
           </div>
         </div>
       )}
+      <Show when={selectedTip() == 20}>
+        <button
+          onClick={() => {
+            navigate("/vote");
+          }}
+        >
+          Login
+        </button>
+      </Show>
     </div>
   );
 }
