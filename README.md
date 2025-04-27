@@ -1,11 +1,21 @@
-# Terrible hacks 2025
+# N factor authentication system
 
-## Auth flow
+A more secure multi factor authentication system, where N is a real number.
 
-1. [x] Email / Password auth
-2. [x] Math problem
-3. [x] Captcha
-4. [x] tic tac toe
-5. [x] RFID
-6. [x] Vote
-7. [x] Last page
+# Auth flow
+
+1. Email / Password auth
+2. Math problem
+3. Captcha
+4. tic tac toe
+5. RFID
+6. Vote
+7. Login!
+
+# Contributors
+
+- @Channertheman + @shawnyu5 built the frontend
+- @gathris built parts of the Frontend and made it look pretty
+- @gingertastrophe built the RFID Arduino module and wrote the code for it
+
+![Arduino module](./img/arduino_module.jpg)
