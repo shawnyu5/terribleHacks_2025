@@ -14,8 +14,8 @@ A more secure multi factor authentication system, where N is a real number.
 
 # Contributors
 
-- @Channertheman + @shawnyu5 built the frontend
-- @gathris built parts of the Frontend and made it look pretty
-- @gingertastrophe built the RFID Arduino module and wrote the code for it
+- [@Channertheman](https://github.com/Channertheman) + [@shawnyu5](https://github.com/shawnyu5) built the frontend
+- [@gathris](https://github.com/gathris) built parts of the Frontend and made it look pretty
+- [@gingertastrophe](https://github.com/gingertastrophe) built the RFID Arduino module and wrote the code for it
 
 ![Arduino module](./img/arduino_module.jpg)
